@@ -1,6 +1,7 @@
 // lib.rs
 
-extern crate brotli;
+use brotli2::read::{BrotliDecoder, BrotliEncoder};
+use std::io::prelude::*;
 
 // use deno_core and futures
 use deno_core::plugin_api::Buf;
@@ -39,9 +40,13 @@ fn op_compress(_interface: &mut dyn Interface, data: &[u8], zero_copy: Option<Ze
             tx.send(Ok(())).unwrap();
         });
         assert!(rx.await.is_ok());
+        let compressor = BrotliEncoder::new(data_str.as_bytes(), 9);
+        let mut decompressor = BrotliDecoder::new(compressor);
 
+        let mut contents = String::new();
+        decompressor.read_to_string(&mut contents).unwrap();
+        assert_eq!(contents, "bruh");
         // return true
-        let result = b"true";
         let result_box: Buf = Box::new(*result);
         result_box
     };
