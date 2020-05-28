@@ -1,2 +1,6 @@
+# ide
+.idea
+
+# cargo build
 target/
 pkg/
