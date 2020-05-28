@@ -81,4 +81,4 @@ jobs:
           files: |
             target/debug/libdeno_brotli.dylib
             target/debug/deno_brotli.dll
-            target/debug/deno_brotli.so
+            target/debug/libdeno_brotli.so
