@@ -20,9 +20,9 @@ use std::path::Path;
 #[no_mangle]
 pub fn deno_plugin_init(interface: &mut dyn Interface) {
     interface.register_op("compress", op_compress);
+    interface.register_op("decompress", op_decompress);
 }
 
-// TODO(divy-work): do the actual compressing
 // deno bindings for `compress`
 fn op_compress(_interface: &mut dyn Interface, data: &[u8], zero_copy: Option<ZeroCopyBuf>) -> Op {
     // convert arg to string
@@ -32,6 +32,26 @@ fn op_compress(_interface: &mut dyn Interface, data: &[u8], zero_copy: Option<Ze
     compress_vec(data, &mut compressed).unwrap();
     let result = compressed;
     let result_box = result.into_boxed_slice();
+
+    Op::Sync(result_box)
+}
+
+// deno bindings for `decompress`
+fn op_decompress(
+    _interface: &mut dyn Interface,
+    data: &[u8],
+    zero_copy: Option<ZeroCopyBuf>,
+) -> Op {
+    // convert arg to string
+    let data_str = std::str::from_utf8(&data[..]).unwrap().to_string();
+    let mut decompressed = [0; 2048];
+    let mut decompressed = &mut decompressed[..];
+    decompress_buf(data, &mut decompressed).unwrap();
+    //let result = std::str::from_utf8(&decompressed).unwrap();
+    let b: Vec<u8> = decompressed.iter().cloned().collect();
+
+    //let result_box:Buf = Box::new(b);
+    let result_box = b.into_boxed_slice();
 
     Op::Sync(result_box)
 }
