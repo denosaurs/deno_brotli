@@ -41,7 +41,8 @@ if (isDev) {
 }
 
 const {
-  compress
+  compress,
+  decompress
 } = Deno.core.ops();
 
 const textDecoder = new TextDecoder();
@@ -51,5 +52,13 @@ export function runCompress(arg) {
   const view = encoder.encode(arg);
 
   const response = Deno.core.dispatch(compress, view);
+  return textDecoder.decode(response);
+}
+
+export function runDecompress(arg) {
+  const encoder = new TextEncoder();
+  const view = encoder.encode(arg);
+
+  const response = Deno.core.dispatch(decompress, view);
   return textDecoder.decode(response);
 }
