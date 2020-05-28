@@ -46,7 +46,7 @@ fn op_decompress(
     let data_str = std::str::from_utf8(&data[..]).unwrap().to_string();
     let mut decompressed = [0; 2048];
     let mut decompressed = &mut decompressed[..];
-    decompress_buf(data, &mut decompressed).unwrap();
+    decompress_buf(&data, &mut &mut decompressed).unwrap();
     //let result = std::str::from_utf8(&decompressed).unwrap();
     let b: Vec<u8> = decompressed.iter().cloned().collect();
 
