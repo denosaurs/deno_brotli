@@ -1,6 +1,7 @@
 # deno_brotli
 
 [![stars](https://img.shields.io/github/stars/denosaurs/deno_brotli)](https://github.com/denosaurs/deno_brotli/stargazers)
+[![workflow](https://img.shields.io/github/workflow/status/denosaurs/deno_brotli/ci)](https://github.com/denosaurs/deno_brotli/actions)
 [![releases](https://img.shields.io/github/v/release/denosaurs/deno_brotli)](https://github.com/denosaurs/deno_brotli/releases/latest/)
 [![deno version](https://img.shields.io/badge/deno-^1.0.2-informational)](https://github.com/denoland/deno)
 [![deno doc](https://img.shields.io/badge/deno-doc-informational)](https://doc.deno.land/https/deno.land/x/deno_brotli/mod.ts)
