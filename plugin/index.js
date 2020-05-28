@@ -51,6 +51,5 @@ export function runCompress(arg) {
   const view = encoder.encode(arg);
 
   const response = Deno.core.dispatch(compress, view);
+  return textDecoder.decode(response);
 }
-
-Deno.core.setAsyncHandler(compress, (response) => {});

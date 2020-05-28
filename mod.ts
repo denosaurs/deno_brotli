@@ -18,8 +18,7 @@ class Brotli {
    * @param {string} str The string to be compressed
    */
   compress(str: string) {
-    runCompress(str);
-    return this;
+    return runCompress(str);
   }
 }
 

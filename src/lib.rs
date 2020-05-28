@@ -1,6 +1,6 @@
 // lib.rs
 
-use brotli2::read::{BrotliDecoder, BrotliEncoder};
+use brotli2::raw::{decompress_buf, CoStatus, Compress, CompressOp, Error};
 use std::io::prelude::*;
 
 // use deno_core and futures
@@ -28,28 +28,31 @@ fn op_compress(_interface: &mut dyn Interface, data: &[u8], zero_copy: Option<Ze
     // convert arg to string
     let data_str = std::str::from_utf8(&data[..]).unwrap().to_string();
 
-    // in case, we need a optional functionality in future
-    let fut = async move {
-        if let Some(buf) = zero_copy {
-            let _buf_str = std::str::from_utf8(&buf[..]).unwrap();
-            println!("data: {}", data_str);
+    let mut compressed = Vec::new();
+    compress_vec(data, &mut compressed).unwrap();
+    let result = compressed;
+    let result_box = result.into_boxed_slice();
+
+    Op::Sync(result_box)
+}
+
+// An example of compressing `input` into the destination vector
+// `output`, expanding as necessary
+fn compress_vec(mut input: &[u8], output: &mut Vec<u8>) -> Result<(), Error> {
+    let mut compress = Compress::new();
+    let nilbuf = &mut &mut [][..];
+    loop {
+        // Compressing to a buffer is easiest when the slice is already
+        // available - since we need to grow, extend from compressor
+        // internal buffer.
+        let status = r#try!(compress.compress(CompressOp::Finish, &mut input, nilbuf));
+        while let Some(buf) = compress.take_output(None) {
+            output.extend_from_slice(buf)
         }
-        let (tx, rx) = futures::channel::oneshot::channel::<Result<(), ()>>();
-        std::thread::spawn(move || {
-            std::thread::sleep(std::time::Duration::from_secs(1));
-            tx.send(Ok(())).unwrap();
-        });
-        assert!(rx.await.is_ok());
-        let compressor = BrotliEncoder::new(data_str.as_bytes(), 9);
-        let mut decompressor = BrotliDecoder::new(compressor);
-
-        let mut contents = String::new();
-        decompressor.read_to_string(&mut contents).unwrap();
-        assert_eq!(contents, "bruh");
-        // return true
-        let result_box: Buf = Box::new(*result);
-        result_box
-    };
-
-    Op::Async(fut.boxed())
+        match status {
+            CoStatus::Finished => break,
+            CoStatus::Unfinished => (),
+        }
+    }
+    Ok(())
 }
