@@ -3,7 +3,7 @@
 // Import deno plugin methods
 import {
   runCompress,
-  runDecompress
+  runDecompress,
 } from "./plugin/index.js";
 
 // Import types

@@ -1,4 +1,4 @@
-import { prepare } from 'https://raw.githubusercontent.com/manyuanrong/deno-plugin-prepare/master/mod.ts';
+import { prepare } from "https://raw.githubusercontent.com/manyuanrong/deno-plugin-prepare/master/mod.ts";
 
 const filenameBase = "deno_brotli";
 
@@ -42,7 +42,7 @@ if (isDev) {
 
 const {
   compress,
-  decompress
+  decompress,
 } = Deno.core.ops();
 
 const textDecoder = new TextDecoder();

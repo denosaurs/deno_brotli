@@ -1,4 +1,4 @@
-import Brotli from '../mod.ts';
+import Brotli from "../mod.ts";
 
 const brotli = new Brotli();
 

@@ -1,7 +1,7 @@
-import Brotli from '../mod.ts';
+import Brotli from "../mod.ts";
 
 const brotli = new Brotli();
 
 console.log(
-  brotli.decompress(brotli.compress("bruh"))
+  brotli.decompress(brotli.compress("bruh")),
 );
