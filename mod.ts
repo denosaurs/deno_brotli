@@ -1,36 +1,11 @@
-// mod.ts
+import init, { source, compress as wasm_compress, decompress as wasm_decompress } from "./wasm.js";
 
-// Import deno plugin methods
-import {
-  runCompress,
-  runDecompress,
-} from "./plugin/index.js";
+await init(source);
 
-// Import types
-// TODO(divy-work): Define types
-// import { } from "./types.ts";
-
-/**
- * Creates an deno-brotli instance
- */
-class Brotli {
-  /**
-   * executes runCompress with the str param
-   * @param {string} str The string to be compressed
-   */
-  compress(str: string) {
-    return runCompress(str);
-  }
-  /**
-   * executes runDecompress with the str param
-   * @param {string} str The string to be decompressed
-   */
-  decompress(str: string) {
-    return runDecompress(str);
-  }
+export function compress(input: Uint8Array, bufferSize: number = 4096, quality: number = 6, lgwin: number = 22): Uint8Array {
+  return wasm_compress(input, bufferSize, quality, lgwin);
 }
-
-/**
- * Export the Brotli class
- */
-export default Brotli;
+  
+export function decompress(input: Uint8Array, bufferSize: number = 4096): Uint8Array {
+  return wasm_decompress(input, bufferSize);
+}

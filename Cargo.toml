@@ -1,7 +1,7 @@
 [package]
-name = "deno-brotli"
-version = "0.0.1"
-authors = ["Divy Srivastava"]
+name = "deno_brotli"
+version = "0.1.0"
+authors = ["Elias SJögreen", "Divy Srivastava"]
 edition = "2018"
 publish = false
 
@@ -9,11 +9,9 @@ publish = false
 crate-type = ["cdylib"]
 
 [dependencies]
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-futures = "0.3.4"
-deno_core = ""
-brotli2 = ""
+wasm-bindgen = "0.2.63"
+brotli = "3.3.0"
+wee_alloc = "0.4.5"
 
-[build-dependencies]
-pkg-config = "0.3.17"
+[profile.release]
+lto = true
