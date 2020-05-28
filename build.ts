@@ -13,12 +13,13 @@ let binary = "";
 for (let i = 0, l = wasm.length; i < l; i++) {
   binary += String.fromCharCode(wasm[i]);
 }
+const source = `export const source = Uint8Array.from(atob(\`${
+  btoa(binary)
+}\`), c => c.charCodeAt(0));`;
 
 await Deno.writeFile(
   "wasm.js",
   encoder.encode(
-    `export const source = Uint8Array.from(atob(\`${
-      btoa(binary)
-    }\`), c => c.charCodeAt(0));\n${init}`,
+    `// deno-fmt-ignore-file\n${source}\n${init}`,
   ),
 );
