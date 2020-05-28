@@ -1,7 +1,10 @@
 [package]
 name = "deno_brotli"
+description = "Brotli wasm module for deno"
+repository = "https://github.com/denosaurs/deno_brotli"
+license = "MIT"
 version = "0.1.0"
-authors = ["Elias SJögreen", "Divy Srivastava"]
+authors = ["Elias SJögreen", "Divy Srivastava", "Filippo Rossi"]
 edition = "2018"
 publish = false
 
@@ -15,3 +18,4 @@ wee_alloc = "0.4.5"
 
 [profile.release]
 lto = true
+opt-level = "z"
