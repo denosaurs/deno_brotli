@@ -21,4 +21,3 @@ lto = true
 opt-level = "z"
 
 [features]
-default = ["wee_alloc"]

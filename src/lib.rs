@@ -4,10 +4,10 @@ use brotli::{CompressorWriter, DecompressorWriter};
 use std::io::Write;
 use wasm_bindgen::prelude::wasm_bindgen;
 
+#[cfg(feature = "wee_alloc")]
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-#[cfg(feature = "wee_alloc")]
 #[wasm_bindgen]
 pub fn compress(input: &[u8], buffer_size: usize, quality: u32, lgwin: u32) -> Vec<u8> {
     let mut output = Vec::new();
