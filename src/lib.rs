@@ -46,10 +46,7 @@ pub fn compress_test() {
 #[test]
 pub fn decompress_test() {
     const BUFFER_SIZE: usize = 4692;
-    assert_eq!(
-        decompress(&[59], BUFFER_SIZE),
-        "".as_bytes()
-    );
+    assert_eq!(decompress(&[59], BUFFER_SIZE), "".as_bytes());
     assert_eq!(
         decompress(&[27, 63, 0, 0, 36, 176, 226, 153, 64, 18], BUFFER_SIZE),
         "X".repeat(64).as_bytes()
