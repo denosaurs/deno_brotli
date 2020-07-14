@@ -4,7 +4,7 @@ import { encode } from "https://deno.land/std@0.61.0/encoding/base64.ts";
 import { compress } from "https://deno.land/x/lz4@v0.1.1/mod.ts";
 import Terser from "https://jspm.dev/terser@4.8.0";
 
-const name = "brotli";
+const name = "deno_brotli";
 
 const encoder = new TextEncoder();
 
