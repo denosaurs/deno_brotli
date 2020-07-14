@@ -68,7 +68,7 @@ log(
 );
 
 log("inlining wasm in js");
-const source = `import * as lz4 from "https://deno.land/x/lz4@v0.1.1/mod.ts";
+const source = `import * as lz4 from "https://deno.land/x/lz4@v0.1.2/mod.ts";
                 export const source = lz4.decompress(Uint8Array.from(atob("${encoded}"), c => c.charCodeAt(0)));`;
 
 const init = await Deno.readTextFile(`pkg/${name}.js`);
