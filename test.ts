@@ -1,7 +1,7 @@
 // Copyright 2020-present the denosaurs team. All rights reserved. MIT license.
 
 import { compress, decompress } from "./mod.ts";
-import { assertEquals } from "https://deno.land/std@0.56.0/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std@0.61.0/testing/asserts.ts";
 
 function encode(input: string): Uint8Array {
   return new TextEncoder().encode(input);
