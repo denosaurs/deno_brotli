@@ -15,10 +15,10 @@ jobs:
           deno-version: v1.x
 
       - name: Run deno fmt
-        run: deno fmt --check
+        run: deno fmt --check --ignore=wasm.js
 
       - name: Run deno lint
-        run: deno lint --unstable
+        run: deno lint --unstable --ignore=wasm.js
 
   test:
     runs-on: ubuntu-latest
