@@ -1,3 +1,5 @@
+// Copyright 2020 the denosaurs team. All rights reserved. MIT license.
+
 export async function requires(...executables: string[]) {
   const where = Deno.build.os === "windows" ? "where" : "which";
 

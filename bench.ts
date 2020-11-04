@@ -1,4 +1,4 @@
-// Copyright 2020-present the denosaurs team. All rights reserved. MIT license.
+// Copyright 2020 the denosaurs team. All rights reserved. MIT license.
 
 import { compress, decompress } from "./mod.ts";
 import { bench, runBenchmarks } from "./bench_deps.ts";
@@ -9,13 +9,12 @@ bench({
   func(b): void {
     const original = new Uint8Array(65536);
     crypto.getRandomValues(original);
-    
+
     b.start();
     compress(original);
     b.stop();
   },
 });
-
 
 bench({
   name: "decompress random",

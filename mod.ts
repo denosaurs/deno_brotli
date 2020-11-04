@@ -1,9 +1,9 @@
-// Copyright 2020-present the denosaurs team. All rights reserved. MIT license.
+// Copyright 2020 the denosaurs team. All rights reserved. MIT license.
 
 import init, {
+  compress as wasmCompress,
+  decompress as wasmDecompress,
   source,
-  compress as wasm_compress,
-  decompress as wasm_decompress,
 } from "./wasm.js";
 
 await init(source);
@@ -26,11 +26,11 @@ await init(source);
  */
 export function compress(
   input: Uint8Array,
-  bufferSize: number = 4096,
-  quality: number = 6,
-  lgwin: number = 22,
+  bufferSize = 4096,
+  quality = 6,
+  lgwin = 22,
 ): Uint8Array {
-  return wasm_compress(input, bufferSize, quality, lgwin);
+  return wasmCompress(input, bufferSize, quality, lgwin);
 }
 
 /**
@@ -48,7 +48,7 @@ export function compress(
  */
 export function decompress(
   input: Uint8Array,
-  bufferSize: number = 4096,
+  bufferSize = 4096,
 ): Uint8Array {
-  return wasm_decompress(input, bufferSize);
+  return wasmDecompress(input, bufferSize);
 }

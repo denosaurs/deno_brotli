@@ -1,4 +1,4 @@
-// Copyright 2020-present the denosaurs team. All rights reserved. MIT license.
+// Copyright 2020 the denosaurs team. All rights reserved. MIT license.
 
 use brotli::{CompressorWriter, DecompressorWriter};
 use std::io::Write;
