@@ -1,36 +1,39 @@
-// Copyright 2020 the denosaurs team. All rights reserved. MIT license.
+// Copyright 2020-2022 the denosaurs team. All rights reserved. MIT license.
 
-import { requires, run } from "./_util.ts";
-import { compress, encode, minify } from "./_deps.ts";
+import { encode } from "https://deno.land/std@0.159.0/encoding/base64.ts";
+import { compress } from "https://deno.land/x/lz4@v0.1.2/mod.ts";
+import { minify } from "https://esm.sh/terser@5.15.1";
 
 const name = "deno_brotli";
 const target = "wasm.js";
 const encoder = new TextEncoder();
 
 export async function build() {
-  await requires("cargo", "wasm-pack");
-
   if (!(await Deno.stat("Cargo.toml")).isFile) {
     console.log(`the build script should be executed in the "${name}" root`);
     Deno.exit(1);
   }
 
-  await run(
-    "building rust",
-    ["wasm-pack", "build", "--target", "web", "--release"],
-  );
+  console.log("building rust");
+  await Deno.run({
+    cmd: ["wasm-pack", "build", "--target", "web", "--release"],
+  }).status();
 
   const wasm = await Deno.readFile(`pkg/${name}_bg.wasm`);
   console.log(`read wasm (size: ${wasm.length} bytes)`);
   const compressed = compress(wasm);
   console.log(
-    `compressed wasm using lz4 (reduction: ${wasm.length -
-      compressed.length} bytes, size: ${compressed.length})`,
+    `compressed wasm using lz4 (reduction: ${
+      wasm.length -
+      compressed.length
+    } bytes, size: ${compressed.length})`,
   );
   const encoded = encode(compressed);
   console.log(
-    `encoded wasm using base64, (increase: ${encoded.length -
-      compressed.length} bytes, size: ${encoded.length})`,
+    `encoded wasm using base64, (increase: ${
+      encoded.length -
+      compressed.length
+    } bytes, size: ${encoded.length})`,
   );
 
   console.log("inlining wasm and init code in js");
@@ -48,7 +51,7 @@ export async function build() {
   });
 
   const reduction = new Blob([source]).size -
-    new Blob([output.code]).size;
+    new Blob([output.code!]).size;
   console.log(`minified js, size reduction: ${reduction} bytes`);
 
   console.log(`writing output to file (${target})`);

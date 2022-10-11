@@ -1,5 +1,3 @@
-// Copyright 2020 the denosaurs team. All rights reserved. MIT license.
-
 use brotli::{CompressorWriter, DecompressorWriter};
 use std::io::Write;
 use wasm_bindgen::prelude::wasm_bindgen;
