@@ -1,4 +1,3 @@
-// Copyright 2020-2022 the denosaurs team. All rights reserved. MIT license.
 
 import { encode } from "https://deno.land/std@0.159.0/encoding/ascii85.ts";
 import { compress } from "https://deno.land/x/lz4@v0.1.2/mod.ts";

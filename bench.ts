@@ -1,4 +1,3 @@
-// Copyright 2020 the denosaurs team. All rights reserved. MIT license.
 
 import { compress, decompress } from "./mod.ts";
 
