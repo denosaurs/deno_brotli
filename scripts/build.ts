@@ -1,4 +1,3 @@
-
 import { encode } from "https://deno.land/std@0.159.0/encoding/ascii85.ts";
 import { compress } from "https://deno.land/x/lz4@v0.1.2/mod.ts";
 import { minify } from "https://esm.sh/terser@5.15.1";

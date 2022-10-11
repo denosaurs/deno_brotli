@@ -1,4 +1,3 @@
-
 import { compress, decompress } from "./mod.ts";
 
 {

@@ -1,4 +1,3 @@
-
 import init, {
   compress as wasmCompress,
   decompress as wasmDecompress,
