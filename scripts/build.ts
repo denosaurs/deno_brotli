@@ -1,6 +1,6 @@
 // Copyright 2020-2022 the denosaurs team. All rights reserved. MIT license.
 
-import { encode } from "https://deno.land/std@0.159.0/encoding/base64.ts";
+import { encode } from "https://deno.land/std@0.159.0/encoding/ascii85.ts";
 import { compress } from "https://deno.land/x/lz4@v0.1.2/mod.ts";
 import { minify } from "https://esm.sh/terser@5.15.1";
 
@@ -28,7 +28,9 @@ export async function build() {
       compressed.length
     } bytes, size: ${compressed.length})`,
   );
-  const encoded = encode(compressed);
+  const encoded = encode(compressed)
+    .replaceAll("\\", "\\\\")
+    .replaceAll("`", "\\`");
   console.log(
     `encoded wasm using base64, (increase: ${
       encoded.length -
@@ -39,7 +41,8 @@ export async function build() {
   console.log("inlining wasm and init code in js");
   const init = await Deno.readTextFile(`pkg/${name}.js`);
   const source = `import * as lz4 from "https://deno.land/x/lz4@v0.1.2/mod.ts";
-                export const source = lz4.decompress(Uint8Array.from(atob("${encoded}"), c => c.charCodeAt(0)));
+                  import { decode } from "https://deno.land/std@0.159.0/encoding/ascii85.ts";
+                export const source = lz4.decompress(decode(\`${encoded}\`));
                 ${init}`;
 
   console.log("minifying js using terser");

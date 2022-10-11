@@ -1,0 +1,23 @@
+{
+  "tasks": {
+    "build": "deno run -A --unstable ./scripts/build.ts"
+  },
+  "fmt": {
+    "files": {
+      "exclude": [
+        "wasm.js",
+        "pkg/",
+        "target/"
+      ]
+    }
+  },
+  "lint": {
+    "files": {
+      "exclude": [
+        "wasm.js",
+        "pkg/",
+        "target/"
+      ]
+    }
+  }
+}
