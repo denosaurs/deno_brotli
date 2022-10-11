@@ -10,7 +10,7 @@ import { compress, decompress } from "./mod.ts";
     name: "compress",
     fn: () => {
       compress(original);
-    }
+    },
   });
 }
 
@@ -23,6 +23,6 @@ import { compress, decompress } from "./mod.ts";
     name: "decompress",
     fn: () => {
       decompress(compressed);
-    }
+    },
   });
 }
