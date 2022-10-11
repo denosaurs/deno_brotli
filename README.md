@@ -9,7 +9,9 @@
 [![license](https://img.shields.io/github/license/denosaurs/deno_brotli)](https://github.com/denosaurs/deno_brotli/blob/master/LICENSE)
 [![issues](https://img.shields.io/github/issues/denosaurs/deno_brotli)](https://github.com/denosaurs/deno_brotli/issues)
 
-This module provides [brotli](https://en.wikipedia.org/wiki/Brotli) support for deno and the web by providing [simple bindings](src/lib.rs) using [rust-brotli](https://github.com/dropbox/rust-brotli) compiled to webassembly.
+This module provides [brotli](https://en.wikipedia.org/wiki/Brotli) support for
+deno and the web by providing [simple bindings](src/lib.rs) using
+[rust-brotli](https://github.com/dropbox/rust-brotli) compiled to webassembly.
 
 ## Usage
 
@@ -20,8 +22,8 @@ import { compress } from "https://deno.land/x/brotli/mod.ts";
 
 const text = new TextEncoder().encode("X".repeat(64));
 
-console.log(text.length);                   // 64 Bytes
-console.log(compress(text).length);         // 10 Bytes
+console.log(text.length); // 64 Bytes
+console.log(compress(text).length); // 10 Bytes
 ```
 
 ### Decompression
@@ -29,9 +31,9 @@ console.log(compress(text).length);         // 10 Bytes
 ```ts
 import { decompress } from "https://deno.land/x/brotli/mod.ts";
 
-const compressed = Uint8Array.from([ 27, 63, 0, 0, 36, 176, 226, 153, 64, 18 ]);
+const compressed = Uint8Array.from([27, 63, 0, 0, 36, 176, 226, 153, 64, 18]);
 
-console.log(compressed.length);             // 10 Bytes
+console.log(compressed.length); // 10 Bytes
 console.log(decompress(compressed).length); // 64 Bytes
 ```
 
@@ -39,8 +41,10 @@ console.log(decompress(compressed).length); // 64 Bytes
 
 ### Contribution
 
-Pull request, issues and feedback are very welcome. Code style is formatted with `deno fmt` and commit messages are done following [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) spec.
+Pull request, issues and feedback are very welcome. Code style is formatted with
+`deno fmt` and commit messages are done following
+[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) spec.
 
 ### Licence
 
-Copyright 2020-present, the denosaurs team. All rights reserved. MIT license.
+Copyright 2020-2022, the denosaurs team. All rights reserved. MIT license.

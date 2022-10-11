@@ -1,6 +1,0 @@
-{
-  "files.exclude": {
-    "wasm.js": true
-  },
-  "deno.enable": true
-}
